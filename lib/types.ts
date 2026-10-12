@@ -1,0 +1,14 @@
+export type Goal = 'fat_loss' | 'weight_loss' | 'muscle' | 'tone' | 'bodyweight';
+export type Place = 'gym' | 'home' | 'home_equipped';
+export type Level = 'beginner' | 'intermediate' | 'advanced';
+export type WeightBand = '60-85' | '85-110' | '110+';
+export type Equipment = 'bodyweight' | 'dumbbell' | 'band' | 'machine' | 'cable' | 'barbell' | 'bench' | 'cardio';
+export type Muscle = 'full' | 'upper' | 'lower' | 'core' | 'cardio';
+export type Profile = { weight: number; height: number; age: number; goal: Goal; place: Place; level: Level; days: number; minutes: number; limitations: string[]; };
+export type Exercise = { id: string; name: string; muscle: Muscle; equipment: Equipment; difficulty: Level; impact: 'low' | 'medium' | 'high'; instructions: string[]; alternatives?: string[]; pattern?: 'push'|'pull'|'squat'|'hinge'|'core'|'cardio'; mediaUrl?: string };
+export type PlannedExercise = { instanceId: string; exerciseId: string; sets: number; reps: string; rest: number; duration?: number; note?: string };
+export type Workout = { id: string; title: string; subtitle: string; focus: Muscle; exercises: PlannedExercise[] };
+export type Program = { id: string; createdAt: string; profile: Profile; workouts: Workout[]; seed: number; notes: string[] };
+export type WorkoutLog = { date: string; completedSets: Record<string, number[]>; finishedAt?: string; setMetrics?: Record<string, Record<string,{kg:number; reps:number}>>; programId: string; workoutId: string };
+import type {NutritionPlan} from './nutrition';
+export type AppData = { profile?: Profile; program?: Program; logs: WorkoutLog[]; activeWorkout?: string; nutrition?:NutritionPlan; programArchive?:Program[]; weightHistory?:{date:string;weight:number}[]; waterLog?:Record<string,number>; mealChecks?:Record<string,boolean> };
