@@ -1,9 +1,13 @@
 import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';import assert from 'node:assert/strict';import ts from 'typescript';
 const cached={};function get(f){if(cached[f])return cached[f];const filename=path.join(import.meta.dirname,'lib',f+'.ts');const source=fs.readFileSync(filename,'utf8');const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;const mod={exports:{}};const sandbox={module:mod,exports:mod.exports,require:(name)=>get(name.replace('./','')),Date,Math,Set,Array,Number,JSON,Error,RegExp};vm.runInNewContext(js,sandbox,{filename});return cached[f]=mod.exports;}
-const ex=get('exercises'),gen=get('generator'),nut=get('nutrition');
+const ex=get('exercises'),gen=get('generator'),nut=get('nutrition'),prog=get('progression');
 assert.equal(ex.exercises.length,390,`toplam ${ex.exercises.length}`);assert.equal(new Set(ex.exercises.map(x=>x.id)).size,390);
 for(const place of ['gym','home','home_equipped'])for(const level of ['beginner','intermediate','advanced'])for(const goal of ['fat_loss','muscle','bodyweight'])for(const minutes of [20,30,45,60]){
  const profile={weight:place==='gym'?115:78,height:175,age:32,goal,place,level,days:3,minutes,limitations:[]};const program=gen.generateProgram(profile,1);assert.equal(program.workouts.length,3);for(const w of program.workouts){assert.ok(w.exercises.length>=2);assert.ok(gen.estimateWorkoutMinutes(w.exercises)<=minutes+0.01,`Süre ${gen.estimateWorkoutMinutes(w.exercises)}, hedef ${minutes}`);for(const e of w.exercises){assert.ok(ex.exerciseById(e.exerciseId));if(place==='home')assert.equal(ex.exerciseById(e.exerciseId).equipment,'bodyweight');}}}
 const nutrition=nut.generateNutrition({weight:85,height:175,age:32,goal:'fat_loss',place:'gym',level:'beginner',days:3,minutes:45,limitations:[]},{diet:'balanced',allergies:[],meals:4,activity:'moderate'},1);
 assert.equal(nutrition.days.length,7);assert.ok(nutrition.targets.kcal>0);assert.ok(nutrition.days.every(day=>Number.isFinite(day.portionFactor)&&day.meals.length===4));
+const sampleProgram=gen.generateProgram({weight:85,height:175,age:32,goal:'muscle',place:'gym',level:'beginner',days:3,minutes:45,limitations:[]},2);
+const firstWorkout=sampleProgram.workouts[0],firstExercise=firstWorkout.exercises[0];
+const insights=prog.buildProgressionInsights(sampleProgram,[{date:new Date().toISOString(),finishedAt:new Date().toISOString(),programId:sampleProgram.id,workoutId:firstWorkout.id,completedSets:{[firstExercise.instanceId]:[0,1]},setMetrics:{[firstExercise.instanceId]:{'0':{kg:20,reps:12},'1':{kg:20,reps:12}}}}]);
+assert.ok(insights.completedSets>=2);assert.ok(insights.suggestions.length>0);assert.ok(insights.balance.length>0);
 console.log(`OK: ${ex.exercises.length} seçenek (${ex.baseExerciseCount} temel hareket), 108 örnek profil ve süre/ekipman kontrolleri.`);
