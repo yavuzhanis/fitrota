@@ -33,12 +33,13 @@ npm run build
 ## Cloudflare Pages ile yayınlama
 1. GitHub reposunu Cloudflare Pages'e bağla: **Workers & Pages → Create → Pages → Connect to Git**.
 2. Repository: `yavuzhanis/fitrota`.
-3. Framework preset: **Next.js** veya **None** seçilebilir; ayarları aşağıdaki gibi gir:
+3. Framework preset: **Next.js (Static HTML Export)** seç. Bu seçenek yoksa **None** seçip ayarları elle gir:
    - Build command: `npm run build`
    - Build output directory: `out`
    - Root directory: `/`
-4. Node.js sürümü için Cloudflare ortam değişkeni gerekirse `NODE_VERSION=22` ekle.
-5. **Save and Deploy** ile yayına al. Sonraki `git push` işlemleri otomatik yeni deploy üretir.
+4. Deploy command / custom deploy command alanı görünüyorsa boş bırak. `npx wrangler deploy` kullanma; bu Worker/OpenNext akışını başlatır.
+5. Node.js sürümü için Cloudflare ortam değişkeni gerekirse `NODE_VERSION=22` ekle.
+6. **Save and Deploy** ile yayına al. Sonraki `git push` işlemleri otomatik yeni deploy üretir.
 
 Bu uygulama backend, API route, server action veya veritabanı kullanmadığı için statik hosting'e uygundur. Veriler cihazdaki tarayıcı depolamasında saklanır; farklı cihazlar arasında otomatik senkronize olmaz.
 
