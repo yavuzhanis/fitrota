@@ -1,6 +1,6 @@
 # FitRota
 
-Mobil öncelikli, ücretsiz, hesap gerektirmeyen antrenman planlayıcısı. **Next.js + TypeScript + React**, Vercel uyumlu.
+Mobil öncelikli, ücretsiz, hesap gerektirmeyen antrenman planlayıcısı. **Next.js + TypeScript + React**, statik export ve Cloudflare Pages uyumlu.
 
 ## Özellikler
 - Kilo segmentleri: 60–85 kg, 85–110 kg, 110+ kg. Uygulama 60–350 kg aralığında giriş kabul eder; 85 kg üst segmente dahildir.
@@ -27,6 +27,20 @@ npm run typecheck
 npm run lint
 npm run build
 ```
+
+`npm run build` komutu statik yayın için `out/` klasörü üretir.
+
+## Cloudflare Pages ile yayınlama
+1. GitHub reposunu Cloudflare Pages'e bağla: **Workers & Pages → Create → Pages → Connect to Git**.
+2. Repository: `yavuzhanis/fitrota`.
+3. Framework preset: **Next.js** veya **None** seçilebilir; ayarları aşağıdaki gibi gir:
+   - Build command: `npm run build`
+   - Build output directory: `out`
+   - Root directory: `/`
+4. Node.js sürümü için Cloudflare ortam değişkeni gerekirse `NODE_VERSION=22` ekle.
+5. **Save and Deploy** ile yayına al. Sonraki `git push` işlemleri otomatik yeni deploy üretir.
+
+Bu uygulama backend, API route, server action veya veritabanı kullanmadığı için statik hosting'e uygundur. Veriler cihazdaki tarayıcı depolamasında saklanır; farklı cihazlar arasında otomatik senkronize olmaz.
 
 ## Vercel ile yayınlama
 1. Bu klasörü GitHub'da yeni bir repoya gönder.
