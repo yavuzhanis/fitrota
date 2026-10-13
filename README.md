@@ -8,6 +8,8 @@ Mobil öncelikli, ücretsiz, hesap gerektirmeyen antrenman planlayıcısı. **Ne
 - Spor salonu / ev ekipmansız / ev ekipmanlı, başlangıç / orta / ileri seviye.
 - 2–6 gün, 20/30/45/60 dakika; deterministik varyasyonlu program oluşturucu ve egzersiz yönergeleri.
 - Set işaretleme, dinlenme sayacı, antrenman tamamlanma kaydı ve ilerleme ekranı.
+- Set bazlı kg/tekrar kaydı, tahmini 1RM, kayıtlı hacim ve sonraki hedef önerileri.
+- Sağlık ön kontrolü, temel yasal bilgilendirme sayfaları, sitemap/robots ve PWA uygulama kabuğu cache'i.
 - Tarayıcıda kalıcı depolama (`localStorage`), JSON yedek alma/geri yükleme, tüm verileri silme.
 - Ücretsiz harici API, sunucu, veritabanı veya kullanıcı hesabı gerekmez.
 
@@ -50,7 +52,7 @@ Bu uygulama backend, API route, server action veya veritabanı kullanmadığı i
 4. **Deploy** ile yayınla. Ortam değişkeni gerekmez.
 5. Sonraki `git push` işlemleri Vercel'de yeni dağıtım tetikler.
 
-**Önemli:** Vercel Hobby planı uygunluk ve kullanım koşullarına tabidir; ticari kullanım için plan koşullarını kontrol et. Veriler farklı cihazlar arasında senkronize olmaz. Geri yükleme için JSON yedeğini paylaşabilirsin. Uygulama tarayıcı tabanlıdır; manifest eklenmiştir, çevrimdışı çalışma garantisi yoktur.
+**Önemli:** Vercel Hobby planı uygunluk ve kullanım koşullarına tabidir; ticari kullanım için plan koşullarını kontrol et. Veriler farklı cihazlar arasında senkronize olmaz. Geri yükleme için JSON yedeğini paylaşabilirsin. Uygulama tarayıcı tabanlıdır; manifest ve temel service worker eklenmiştir.
 
 ## Kısıtlar ve güvenlik
 Egzersiz seçimi doğrulanabilir kurallarla yapılır, ücretli üretken yapay zekâ servisine bağlı değildir. Bu sistem klinik değerlendirme, kişisel antrenör veya fizyoterapi yerine geçmez. Kiloya göre öneri yalnızca bir filtrelemedir; sağlık riskinin veya egzersiz uygunluğunun tek ölçüsü değildir. 110+ kg ve belirtilen hassasiyetlerde düşük darbeli egzersizler önceliklendirilir. Özellikle kronik hastalığı veya semptomları olan kişiler uzman görüşü almalıdır.
@@ -68,7 +70,7 @@ Mobil alt menüde **Beslenme** bölümünden 7 günlük örnek öğün listesi o
 - JSON dışa/içe aktarma tüm yeni alanları da kapsar; eski yedek formatıyla uyumludur.
 
 ### Sınırlar
-Beslenme listeleri tıbbi diyet değildir; kalori, makro ve alerjen verileri klinik doğrulama içermemektedir. Market listesi tariflerdeki gıda adlarını verir ve alışveriş için miktarları birleştirmez. Projede egzersiz görselleri, PWA offline cache, set başına gerçek kg/tekrar kaydı ve otomatik testler hâlâ eksiktir. Üretim derlemesi, bağımlılıkların kurulumu ortamda zaman aşımına uğradığı için doğrulanamamıştır.
+Beslenme listeleri tıbbi diyet değildir; kalori, makro ve alerjen verileri klinik doğrulama içermemektedir. Market listesi tariflerdeki gıda adlarını verir ve alışveriş için miktarları birleştirmez. Egzersiz görselleri lisanslı video/GIF yerine yerel SVG hareket demolarıdır.
 
 
 ## v4 - Genişletilmiş egzersiz kütüphanesi
@@ -91,10 +93,18 @@ Beslenme listeleri tıbbi diyet değildir; kalori, makro ve alerjen verileri kli
 - Antrenman süre tahmini; planı hedef süreye göre budama, kısa antrenmanda set azaltımı; toparlanmaya dair yönlendirici notlar. Bunlar spor bilimleri uzmanı onaylı plan değildir.
 - `npm test`: sözdizimi kontrolleri ve 108 profil üzerinden algoritma denemesi. `npm run check`: production build ve ESLint (bağımlılıklar kurulabilirse).
 
+## v6 — Güven ve ilerleme geliştirmeleri
+
+- Program oluşturmadan önce sağlık ön kontrolü ve risk durumlarında uzman onayı işaretleme akışı.
+- İlerleme ekranında kayıtlı hacim, tahmini 1RM, hareket bazlı sonraki hedef ve örüntü dengesi.
+- Ana uygulama kabuğu için temel service worker cache'i.
+- Gizlilik Politikası, Kullanım Şartları ve Sağlık Uyarısı sayfaları.
+- SEO için metadata, canonical, sitemap ve robots dosyaları.
+
 ### Henüz tamamlanmayanlar
 
 - Doğrulanmış, lisanslı, egzersiz başına gerçek GIF/video entegrasyonu. Video araması harici bağlantıdır.
 - Gerçek telefonlarda erişilebilirlik, performans ve mobil uçtan uca testler.
-- npm install zaman aşımından dolayı başarılı Next.js production build onayı.
-- Vercel canlı deploy ve alan adı kontrolü (GitHub/Vercel bağlantısı gerekir).
-- Hareket örüntü etiketleri eklendi; anatomik bölge ve haftalık hacim bakımından kapsamlı antrenör seviyesinde denge optimizasyonu henüz yok.
+- Özel alan adı ve sosyal paylaşım görseli.
+- Hesap, bulut senkronizasyonu ve cihazlar arası otomatik veri taşıma.
+- Anatomik kas grubu bazlı hacim dengesi, RPE/RIR, deload ve otomatik program güncelleme.
