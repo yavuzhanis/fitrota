@@ -3,7 +3,7 @@
 Mobil öncelikli, ücretsiz, hesap gerektirmeyen antrenman planlayıcısı. **Next.js + TypeScript + React**, statik export ve Cloudflare Pages uyumlu.
 
 ## Özellikler
-- Kilo segmentleri: 60–85 kg, 85–110 kg, 110+ kg. Uygulama 60–350 kg aralığında giriş kabul eder; 85 kg üst segmente dahildir.
+- Kilo segmentleri: 40–60 kg, 60–85 kg, 85–110 kg, 110+ kg. Uygulama 40–350 kg aralığında giriş kabul eder; 60 kg ve 85 kg üst segmente dahildir.
 - Hedefler: yağ yakımı, kilo verme, kas kazanımı, sıkılaşma, vücut ağırlığı.
 - Spor salonu / ev ekipmansız / ev ekipmanlı, başlangıç / orta / ileri seviye.
 - 2–6 gün, 20/30/45/60 dakika; deterministik varyasyonlu program oluşturucu ve egzersiz yönergeleri.
@@ -55,7 +55,7 @@ Bu uygulama backend, API route, server action veya veritabanı kullanmadığı i
 **Önemli:** Vercel Hobby planı uygunluk ve kullanım koşullarına tabidir; ticari kullanım için plan koşullarını kontrol et. Veriler farklı cihazlar arasında senkronize olmaz. Geri yükleme için JSON yedeğini paylaşabilirsin. Uygulama tarayıcı tabanlıdır; manifest ve temel service worker eklenmiştir.
 
 ## Kısıtlar ve güvenlik
-Egzersiz seçimi doğrulanabilir kurallarla yapılır, ücretli üretken yapay zekâ servisine bağlı değildir. Bu sistem klinik değerlendirme, kişisel antrenör veya fizyoterapi yerine geçmez. Kiloya göre öneri yalnızca bir filtrelemedir; sağlık riskinin veya egzersiz uygunluğunun tek ölçüsü değildir. 110+ kg ve belirtilen hassasiyetlerde düşük darbeli egzersizler önceliklendirilir. Özellikle kronik hastalığı veya semptomları olan kişiler uzman görüşü almalıdır.
+Egzersiz seçimi doğrulanabilir kurallarla yapılır, ücretli üretken yapay zekâ servisine bağlı değildir. Bu sistem klinik değerlendirme, kişisel antrenör veya fizyoterapi yerine geçmez. Kiloya göre öneri yalnızca bir filtrelemedir; sağlık riskinin veya egzersiz uygunluğunun tek ölçüsü değildir. 50 kg altı, 110+ kg ve belirtilen hassasiyetlerde düşük darbeli egzersizler önceliklendirilir. Özellikle kronik hastalığı veya semptomları olan kişiler uzman görüşü almalıdır.
 
 ## Beslenme modülü
 

@@ -1,7 +1,7 @@
 export type Goal = 'fat_loss' | 'weight_loss' | 'muscle' | 'tone' | 'bodyweight';
 export type Place = 'gym' | 'home' | 'home_equipped';
 export type Level = 'beginner' | 'intermediate' | 'advanced';
-export type WeightBand = '60-85' | '85-110' | '110+';
+export type WeightBand = '40-60' | '60-85' | '85-110' | '110+';
 export type Equipment = 'bodyweight' | 'dumbbell' | 'band' | 'machine' | 'cable' | 'barbell' | 'bench' | 'cardio';
 export type Muscle = 'full' | 'upper' | 'lower' | 'core' | 'cardio';
 export type Profile = { weight: number; height: number; age: number; goal: Goal; place: Place; level: Level; days: number; minutes: number; limitations: string[]; riskFlags?: string[]; medicalClearance?: boolean; };
